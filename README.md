@@ -3,7 +3,7 @@ Text Mining with Tidy Data Principles Lessons
 
 ### Strategic and Competitive Intelligence 2020
 
-by Filippo Chiarelloe
+by Filippo Chiarello
 
 Re-adapted from: [Julia Silge Workshop Rstudio::conf 2020](https://github.com/rstudio-conf-2020/text-mining)
 
