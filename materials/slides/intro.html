@@ -311,14 +311,14 @@ tidy_book %&gt;%
 ```
 ## Rows: 10
 ## Columns: 3
-## $ gutenberg_id &lt;int&gt; 5614, 5614, 5614, 5614, 5614, 5614, 5614, 5614, 5614, 56…
-## $ line         &lt;int&gt; 6566, 12297, 2220, 9125, 4068, 1701, 10955, 1467, 12916,…
-## $ word         &lt;chr&gt; "8", "the", "the", "19", "in", "correct", "k2", "8", "23…
+## $ gutenberg_id &lt;int&gt; 6522, 6522, 6522, 6522, 6522, 6522, 6522, 6522, 6522, 65…
+## $ line         &lt;int&gt; 1670, 1262, 1654, 668, 1300, 1390, 1759, 1251, 261, 505
+## $ word         &lt;chr&gt; "washed", "cloud", "things", "and", "the", "along", "gai…
 ```
 
 ---
 
-## ## Pop Quiz 🤔
+## Pop Quiz 🤔
 
 .large[What do you predict will happen if we run the following code?]
 
@@ -341,20 +341,20 @@ tidy_book %&gt;%
 ```
 
 ```
-## # A tibble: 6,538 x 2
+## # A tibble: 2,106 x 2
 ##    word      n
 ##    &lt;chr&gt; &lt;int&gt;
-##  1 the    4331
-##  2 to     4162
-##  3 of     3610
-##  4 and    3585
-##  5 her    2203
-##  6 i      2065
-##  7 a      1954
-##  8 in     1880
-##  9 was    1843
-## 10 she    1695
-## # … with 6,528 more rows
+##  1 the     882
+##  2 and     358
+##  3 of      337
+##  4 in      270
+##  5 my      250
+##  6 to      247
+##  7 i       236
+##  8 is      152
+##  9 you     136
+## 10 your    134
+## # … with 2,096 more rows
 ```
 
 
@@ -484,22 +484,13 @@ tidy_book %&gt;%
 
 ---
 
-background-image: url(figs/tilecounts-1.png)
-background-size: 700px
-
----
-
-background-image: url(figs/tilerate-1.png)
-background-size: 700px
-
----
-
 background-image: url(figs/p_and_p_cover.png)
 background-size: cover
 
 class: inverse, center, middle
 
-## SENTIMENT ANALYSIS 😄 😢 😠
+# SENTIMENT ANALYSIS
+# Using lexicons
 
 ---
 
@@ -621,28 +612,16 @@ tidy_book %&gt;%
 ## # A tibble: 2 x 2
 ##   sentiment     n
 ##   &lt;chr&gt;     &lt;int&gt;
-## 1 positive   5052
-## 2 negative   3652
+## 1 negative    470
+## 2 positive    356
 ```
 
----
-
-&lt;img src="figs/blue_jane.png" width="150px"/&gt;
-
-## Jane wants to know...
-
-.large[What kind of join is appropriate for sentiment analysis?]
-
-- .large[`anti_join()`]
-- .large[`full_join()`]
-- .large[`outer_join()`]
-- .large[`inner_join()`]
 
 ---
 
-## **Implementing sentiment analysis**
+## Pop Quiz 🤔
 
-.large[What do you predict will happen if we run the following code? 🤔]
+.large[What do you predict will happen if we run the following code?]
 
 
 ```r
@@ -655,7 +634,7 @@ tidy_book %&gt;%
 
 ## **Implementing sentiment analysis**
 
-.large[What do you predict will happen if we run the following code? 🤔]
+.large[What do you predict will happen if we run the following code?]
 
 
 ```r
@@ -665,20 +644,20 @@ tidy_book %&gt;%
 ```
 
 ```
-## # A tibble: 1,430 x 3
-##    sentiment word         n
-##    &lt;chr&gt;     &lt;chr&gt;    &lt;int&gt;
-##  1 negative  miss       283
-##  2 positive  well       224
-##  3 positive  good       200
-##  4 positive  great      142
-##  5 positive  enough     106
-##  6 positive  better      92
-##  7 positive  love        92
-##  8 positive  pleasure    92
-##  9 positive  happy       83
-## 10 positive  like        77
-## # … with 1,420 more rows
+## # A tibble: 360 x 3
+##    sentiment word       n
+##    &lt;chr&gt;     &lt;chr&gt;  &lt;int&gt;
+##  1 positive  love      33
+##  2 negative  dust      28
+##  3 positive  like      28
+##  4 negative  dark      24
+##  5 positive  joy       17
+##  6 negative  death     15
+##  7 positive  master    15
+##  8 negative  pain      13
+##  9 positive  glad      10
+## 10 positive  silent    10
+## # … with 350 more rows
 ```
 
 ---
@@ -714,7 +693,8 @@ background-size: cover
 
 class: inverse, center, middle
 
-## WHAT IS A DOCUMENT ABOUT? 🤔
+# WHAT IS A DOCUMENT ABOUT?
+# Using tf-idf metric
 
 ---
 
@@ -735,35 +715,30 @@ class: inverse, center, middle
 
 
 ```r
-full_collection &lt;- gutenberg_download(c(1342, 158, 161, 141),
+full_collection &lt;- gutenberg_download(c(1272, 5614, 15076, 29185, 29186),
                                       meta_fields = "title")
 ```
 ---
 
 ## **Understanding tf-idf**
 
-.large[Make a collection (*corpus*) for yourself! 💅]
+.large[Experiment with a collection (*corpus*) for yourself!]
 
 
 ```r
-full_collection
+full_collection %&gt;% 
+  count(title)
 ```
 
 ```
-## # A tibble: 57,238 x 3
-##    gutenberg_id text             title         
-##           &lt;int&gt; &lt;chr&gt;            &lt;chr&gt;         
-##  1          141 "MANSFIELD PARK" Mansfield Park
-##  2          141 ""               Mansfield Park
-##  3          141 "(1814)"         Mansfield Park
-##  4          141 ""               Mansfield Park
-##  5          141 ""               Mansfield Park
-##  6          141 "By Jane Austen" Mansfield Park
-##  7          141 ""               Mansfield Park
-##  8          141 ""               Mansfield Park
-##  9          141 ""               Mansfield Park
-## 10          141 ""               Mansfield Park
-## # … with 57,228 more rows
+## # A tibble: 5 x 2
+##   title                                                             n
+##   &lt;chr&gt;                                                         &lt;int&gt;
+## 1 "Chess Strategy"                                              13512
+## 2 "National Strategy for Combating Terrorism\nFebruary 2003"     1361
+## 3 "National Strategy for Combating Terrorism\nSeptember 2006"    1037
+## 4 "Some Principles of Maritime Strategy"                         9966
+## 5 "The Riddle of the Rhine: Chemical Strategy in Peace and War"  8413
 ```
 
 ---
@@ -773,7 +748,7 @@ full_collection
 
 ```r
 book_words &lt;- full_collection %&gt;%
-* unnest_tokens(word, text) %&gt;%
+  unnest_tokens(word, text) %&gt;%        
   count(title, word, sort = TRUE)
 ```
 
@@ -786,14 +761,12 @@ What do the columns of `book_words` tell us?
 
 ```r
 book_tfidf &lt;- book_words %&gt;%
-* bind_tf_idf(word, title, n)
+  bind_tf_idf(word, title, n)
 ```
 
 ---
 
 ## **Calculating tf-idf**
-
-.large[That's... super exciting???]
 
 
 ```r
@@ -801,28 +774,28 @@ book_tfidf
 ```
 
 ```
-## # A tibble: 28,389 x 6
-##    title               word      n     tf   idf tf_idf
-##    &lt;chr&gt;               &lt;chr&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
-##  1 Mansfield Park      the    6206 0.0387     0      0
-##  2 Mansfield Park      to     5475 0.0341     0      0
-##  3 Mansfield Park      and    5438 0.0339     0      0
-##  4 Emma                to     5239 0.0325     0      0
-##  5 Emma                the    5201 0.0323     0      0
-##  6 Emma                and    4896 0.0304     0      0
-##  7 Mansfield Park      of     4778 0.0298     0      0
-##  8 Pride and Prejudice the    4331 0.0354     0      0
-##  9 Emma                of     4291 0.0267     0      0
-## 10 Pride and Prejudice to     4162 0.0341     0      0
-## # … with 28,379 more rows
+## # A tibble: 20,872 x 6
+##    title                                         word      n     tf   idf tf_idf
+##    &lt;chr&gt;                                         &lt;chr&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+##  1 Some Principles of Maritime Strategy          the    8051 0.0778 0     0     
+##  2 The Riddle of the Rhine: Chemical Strategy i… the    6150 0.0802 0     0     
+##  3 Some Principles of Maritime Strategy          of     4613 0.0446 0     0     
+##  4 Chess Strategy                                the    4104 0.0549 0     0     
+##  5 The Riddle of the Rhine: Chemical Strategy i… of     3820 0.0498 0     0     
+##  6 Chess Strategy                                p      3768 0.0504 0.511 0.0258
+##  7 Some Principles of Maritime Strategy          to     3630 0.0351 0     0     
+##  8 Some Principles of Maritime Strategy          and    2320 0.0224 0     0     
+##  9 Some Principles of Maritime Strategy          in     2191 0.0212 0     0     
+## 10 Some Principles of Maritime Strategy          a      1929 0.0186 0     0     
+## # … with 20,862 more rows
 ```
 
 
 ---
 
-## **Calculating tf-idf**
+## Pop Quiz 🤔]
 
-.large[What do you predict will happen if we run the following code? 🤔]
+.large[What do you predict will happen if we run the following code? 
 
 
 ```r
@@ -832,9 +805,9 @@ book_tfidf %&gt;%
 
 ---
 
-## **Calculating tf-idf**
+## Pop Quiz 🤔]
 
-.large[What do you predict will happen if we run the following code? 🤔]
+.large[What do you predict will happen if we run the following code? 
 
 
 ```r
@@ -843,52 +816,22 @@ book_tfidf %&gt;%
 ```
 
 ```
-## # A tibble: 28,389 x 6
-##    title                 word          n      tf   idf  tf_idf
-##    &lt;chr&gt;                 &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
-##  1 Sense and Sensibility elinor      623 0.00519 1.39  0.00720
-##  2 Emma                  emma        786 0.00488 1.39  0.00677
-##  3 Sense and Sensibility marianne    492 0.00410 1.39  0.00569
-##  4 Mansfield Park        crawford    493 0.00307 1.39  0.00426
-##  5 Pride and Prejudice   darcy       373 0.00305 1.39  0.00423
-##  6 Mansfield Park        fanny       816 0.00509 0.693 0.00352
-##  7 Pride and Prejudice   elizabeth   597 0.00489 0.693 0.00339
-##  8 Emma                  weston      389 0.00242 1.39  0.00335
-##  9 Pride and Prejudice   bennet      294 0.00241 1.39  0.00334
-## 10 Mansfield Park        edmund      364 0.00227 1.39  0.00314
-## # … with 28,379 more rows
+## # A tibble: 20,872 x 6
+##    title                                     word        n      tf   idf  tf_idf
+##    &lt;chr&gt;                                     &lt;chr&gt;   &lt;int&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+##  1 "Chess Strategy"                          kt       1479 0.0198  1.61  0.0319 
+##  2 "Chess Strategy"                          p        3768 0.0504  0.511 0.0258 
+##  3 "Chess Strategy"                          q         977 0.0131  1.61  0.0211 
+##  4 "Chess Strategy"                          k        1240 0.0166  0.916 0.0152 
+##  5 "Chess Strategy"                          r        1155 0.0155  0.916 0.0142 
+##  6 "Chess Strategy"                          pawn      523 0.00700 1.61  0.0113 
+##  7 "Chess Strategy"                          b        1528 0.0205  0.511 0.0105 
+##  8 "Chess Strategy"                          white     805 0.0108  0.916 0.00988
+##  9 "The Riddle of the Rhine: Chemical Strat… gas       773 0.0101  0.916 0.00924
+## 10 "National Strategy for Combating Terrori… terror…   106 0.00998 0.916 0.00915
+## # … with 20,862 more rows
 ```
 
----
-
-## **Calculating tf-idf**
-
-.unscramble[U N S C R A M B L E]
-
-```
-group_by(title) %&gt;%
-```
-```
-book_tfidf %&gt;%
-```
-```
-top_n(10) %&gt;%
-```
-```
-ggplot(aes(fct_reorder(word, tf_idf), tf_idf, fill = title)) +
-```
-```
-facet_wrap(~title, scales = "free")
-```
-```
-ungroup %&gt;%
-```
-```
-geom_col(show.legend = FALSE) +
-```
-```
-coord_flip() +
-```
 ---
 
 ## **Calculating tf-idf**
@@ -911,10 +854,6 @@ book_tfidf %&gt;%
 
 ![](intro_files/figure-html/unnamed-chunk-32-1.png)&lt;!-- --&gt;
 
----
-
-background-image: url(figs/plot_tf_idf-1.png)
-background-size: 800px
 
 ---
 
@@ -929,20 +868,20 @@ tidy_ngram
 ```
 
 ```
-## # A tibble: 122,203 x 2
-##    gutenberg_id bigram        
-##           &lt;int&gt; &lt;chr&gt;         
-##  1         1342 pride and     
-##  2         1342 and prejudice 
-##  3         1342 prejudice by  
-##  4         1342 by jane       
-##  5         1342 jane austen   
-##  6         1342 austen chapter
-##  7         1342 chapter 1     
-##  8         1342 1 it          
-##  9         1342 it is         
-## 10         1342 is a          
-## # … with 122,193 more rows
+## # A tibble: 10,471 x 2
+##    gutenberg_id bigram              
+##           &lt;int&gt; &lt;chr&gt;               
+##  1         6522 original html       
+##  2         6522 html version        
+##  3         6522 version created     
+##  4         6522 created at          
+##  5         6522 at eldritchpress.org
+##  6         6522 eldritchpress.org by
+##  7         6522 by eric             
+##  8         6522 eric eldred         
+##  9         6522 eldred this         
+## 10         6522 this ebook          
+## # … with 10,461 more rows
 ```
 
 ---
@@ -956,32 +895,30 @@ tidy_ngram %&gt;%
 ```
 
 ```
-## # A tibble: 54,998 x 2
+## # A tibble: 7,465 x 2
 ##    bigram       n
 ##    &lt;chr&gt;    &lt;int&gt;
-##  1 of the     464
-##  2 to be      443
-##  3 in the     382
-##  4 i am       302
-##  5 of her     260
-##  6 to the     252
-##  7 it was     251
-##  8 mr darcy   243
-##  9 of his     234
-## 10 she was    209
-## # … with 54,988 more rows
+##  1 of the     103
+##  2 in the     102
+##  3 and the     41
+##  4 to the      34
+##  5 my heart    29
+##  6 in my       27
+##  7 my life     26
+##  8 with the    25
+##  9 of my       24
+## 10 on the      23
+## # … with 7,455 more rows
 ```
 
 ---
 
-&lt;img src="figs/blue_jane.png" width="150px"/&gt;
+## Pop Quiz 🤔]
 
-## Jane wants to know...
-
-.large[Can we use an `anti_join()` right away to remove stop words?]
+.large[How can we remove stop words?]
 
 - .large[Yes! ✅]
-- .large[No 😢]
+- .large[No 😭]
 
 ---
 
@@ -1006,20 +943,20 @@ bigram_counts
 ```
 
 ```
-## # A tibble: 5,922 x 3
-##    word1   word2           n
-##    &lt;chr&gt;   &lt;chr&gt;       &lt;int&gt;
-##  1 lady    catherine     100
-##  2 miss    bingley        72
-##  3 miss    bennet         60
-##  4 sir     william        38
-##  5 de      bourgh         35
-##  6 miss    darcy          34
-##  7 colonel forster        26
-##  8 colonel fitzwilliam    25
-##  9 cried   elizabeth      24
-## 10 miss    lucas          23
-## # … with 5,912 more rows
+## # A tibble: 1,063 x 3
+##    word1    word2       n
+##    &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;
+##  1 lord     buddha      7
+##  2 morning  light       5
+##  3 thy      trumpet     5
+##  4 art      thou        3
+##  5 earthen  lamp        3
+##  6 heart    timid       3
+##  7 lose     heart       3
+##  8 city     wall        2
+##  9 clan     art         2
+## 10 daylight faded       2
+## # … with 1,053 more rows
 ```
 
 ---
@@ -1063,112 +1000,11 @@ background-position: center
 
 ---
 
-## **Let's install some packages**
-
-
-```r
-install.packages(c("widyr", 
-                   "igraph", 
-                   "ggraph"))
-```
-
-
-```r
-library(widyr)
-library(igraph)
-library(ggraph)
-```
-
-
----
-
-## **Network analysis**
-
-
-```r
-bigram_graph &lt;- bigram_counts %&gt;%
-  filter(n &gt; 5) %&gt;%
-* graph_from_data_frame()
-
-bigram_graph
-```
-
-```
-## IGRAPH 74803ef DN-- 48 45 -- 
-## + attr: name (v/c), n (e/n)
-## + edges from 74803ef (vertex names):
-##  [1] lady       -&gt;catherine   miss       -&gt;bingley     miss       -&gt;bennet     
-##  [4] sir        -&gt;william     de         -&gt;bourgh      miss       -&gt;darcy      
-##  [7] colonel    -&gt;forster     colonel    -&gt;fitzwilliam cried      -&gt;elizabeth  
-## [10] miss       -&gt;lucas       miss       -&gt;de          thousand   -&gt;pounds     
-## [13] lady       -&gt;lucas       replied    -&gt;elizabeth   lady       -&gt;catherine's
-## [16] dear       -&gt;lizzy       miss       -&gt;bingley's   catherine  -&gt;de         
-## [19] miss       -&gt;elizabeth   ten        -&gt;thousand    dear       -&gt;sir        
-## [22] gracechurch-&gt;street      miss       -&gt;eliza       charlotte  -&gt;lucas      
-## + ... omitted several edges
-```
-
----
-
-&lt;img src="figs/blue_jane.png" width="150px"/&gt;
-
-## Jane wants to know...
-
-.large[Is `bigram_graph` a tidy dataset?]
-
-- .large[Yes ✅]
-- .large[No 🚫]
-
----
-
-## **Network analysis**
-
-
-```r
-bigram_graph %&gt;%
-  ggraph(layout = "nicely") +
-* geom_edge_link(aes(edge_alpha = n)) +
-* geom_node_text(aes(label = name)) +
-  theme_graph() 
-```
-
----
-
-## **Network analysis**
-
-
-```r
-bigram_graph %&gt;%
-  ggraph(layout = "nicely") +
-* geom_edge_link(aes(edge_alpha = n),
-                 show.legend = FALSE, 
-                 arrow = arrow(length = unit(1.5, 'mm')), 
-                 start_cap = circle(3, 'mm'),
-                 end_cap = circle(3, 'mm')) +
-* geom_node_text(aes(label = name)) +
-  theme_graph()
-```
-
----
-
-
-![](intro_files/figure-html/unnamed-chunk-42-1.png)&lt;!-- --&gt;
-
-
-
----
 
 class: left, middle
 
-&lt;img src="figs/blue_jane.png" width="150px"/&gt;
-
 # Thanks!
 
-&lt;a href="http://twitter.com/juliasilge"&gt;&lt;i class="fa fa-twitter fa-fw"&gt;&lt;/i&gt;&amp;nbsp; @juliasilge&lt;/a&gt;&lt;br&gt;
-&lt;a href="http://github.com/juliasilge"&gt;&lt;i class="fa fa-github fa-fw"&gt;&lt;/i&gt;&amp;nbsp; @juliasilge&lt;/a&gt;&lt;br&gt;
-&lt;a href="https://juliasilge.com"&gt;&lt;i class="fa fa-link fa-fw"&gt;&lt;/i&gt;&amp;nbsp; juliasilge.com&lt;/a&gt;&lt;br&gt;
-&lt;a href="https://tidytextmining.com"&gt;&lt;i class="fa fa-book fa-fw"&gt;&lt;/i&gt;&amp;nbsp; tidytextmining.com&lt;/a&gt;&lt;br&gt;
-&lt;a href="mailto:julia.silge@gmail.com"&gt;&lt;i class="fa fa-paper-plane fa-fw"&gt;&lt;/i&gt;&amp;nbsp; julia.silge@gmail.com&lt;/a&gt;
 
 Slides created with [**remark.js**](http://remarkjs.com/) and the R package [**xaringan**](https://github.com/yihui/xaringan)
     </textarea>

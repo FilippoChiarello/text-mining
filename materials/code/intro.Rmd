@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 What book do *you* want to analyze today?
 
-Replace `1342` below with your own choice:
+Replace `6522` below with your own choice:
 https://www.gutenberg.org/browse/scores/top
 
 ```{r}
@@ -20,7 +20,7 @@ library(tidyverse)
 library(tidytext)
 library(gutenbergr)
 
-full_text <- gutenberg_download(1342)
+full_text <- gutenberg_download(6522)
 ```
 
 Now it's time to tokenize and tidy this text data.
@@ -125,7 +125,7 @@ tidy_book %>%
 Go back to Project Gutenberg and make a collection (*corpus*) for yourself!
 
 ```{r}
-full_collection <- gutenberg_download(c(1342, 158, 161, 141),
+full_collection <- gutenberg_download(c(1272, 5614, 15076, 29185, 29186),
                                       meta_fields = "title")
 
 full_collection
@@ -249,4 +249,3 @@ bigram_graph %>%
   theme_graph() 
 ```
 
-See you tomorrow! <3

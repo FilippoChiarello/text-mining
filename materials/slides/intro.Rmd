@@ -284,7 +284,7 @@ tidy_book %>%
 
 ---
 
-## ## Pop Quiz `r emo::ji("thinking")`
+## Pop Quiz `r emo::ji("thinking")`
 
 .large[What do you predict will happen if we run the following code?]
 
@@ -368,22 +368,13 @@ tidy_book %>%
 
 ---
 
-background-image: url(figs/tilecounts-1.png)
-background-size: 700px
-
----
-
-background-image: url(figs/tilerate-1.png)
-background-size: 700px
-
----
-
 background-image: url(figs/p_and_p_cover.png)
 background-size: cover
 
 class: inverse, center, middle
 
-## SENTIMENT ANALYSIS `r emo::ji_glue(":smile: :cry: :angry:")`
+# SENTIMENT ANALYSIS
+# Using lexicons
 
 ---
 
@@ -428,24 +419,12 @@ tidy_book %>%
   count(sentiment, sort = TRUE)
 ```
 
----
-
-<img src="figs/blue_jane.png" width="150px"/>
-
-## Jane wants to know...
-
-.large[What kind of join is appropriate for sentiment analysis?]
-
-- .large[`anti_join()`]
-- .large[`full_join()`]
-- .large[`outer_join()`]
-- .large[`inner_join()`]
 
 ---
 
-## **Implementing sentiment analysis**
+## Pop Quiz `r emo::ji("thinking")`
 
-.large[What do you predict will happen if we run the following code? `r emo::ji("thinking")`]
+.large[What do you predict will happen if we run the following code?]
 
 ```{r, eval=FALSE}
 tidy_book %>%
@@ -457,7 +436,7 @@ tidy_book %>%
 
 ## **Implementing sentiment analysis**
 
-.large[What do you predict will happen if we run the following code? `r emo::ji("thinking")`]
+.large[What do you predict will happen if we run the following code?]
 
 ```{r }
 tidy_book %>%
@@ -510,7 +489,8 @@ background-size: cover
 
 class: inverse, center, middle
 
-## WHAT IS A DOCUMENT ABOUT? `r emo::ji("thinking")`
+# WHAT IS A DOCUMENT ABOUT?
+# Using tf-idf metric
 
 ---
 
@@ -530,18 +510,19 @@ $$idf(\text{term}) = \ln{\left(\frac{n_{\text{documents}}}{n_{\text{documents co
 .large[Make a collection (*corpus*) for yourself! `r emo::ji("nail")`]
 
 ```{r}
-full_collection <- gutenberg_download(c(1342, 158, 161, 141),
-                                      meta_fields = "title")
 
+full_collection <- gutenberg_download(c(1272, 5614, 15076, 29185, 29186),
+                                      meta_fields = "title")
 ```
 ---
 
 ## **Understanding tf-idf**
 
-.large[Make a collection (*corpus*) for yourself! `r emo::ji("nail")`]
+.large[Experiment with a collection (*corpus*) for yourself!]
 
 ```{r}
-full_collection
+full_collection %>% 
+  count(title)
 ```
 
 ---
@@ -550,7 +531,7 @@ full_collection
 
 ```{r}
 book_words <- full_collection %>%
-  unnest_tokens(word, text) %>%                #<<
+  unnest_tokens(word, text) %>%        
   count(title, word, sort = TRUE)
 ```
 
@@ -562,14 +543,12 @@ What do the columns of `book_words` tell us?
 
 ```{r}
 book_tfidf <- book_words %>%
-  bind_tf_idf(word, title, n)            #<<
+  bind_tf_idf(word, title, n)
 ```
 
 ---
 
 ## **Calculating tf-idf**
-
-.large[That's... super exciting???]
 
 ```{r}
 book_tfidf
@@ -578,9 +557,9 @@ book_tfidf
 
 ---
 
-## **Calculating tf-idf**
+## Pop Quiz `r emo::ji("thinking")`]
 
-.large[What do you predict will happen if we run the following code? `r emo::ji("thinking")`]
+.large[What do you predict will happen if we run the following code? 
 
 ```{r, eval=FALSE}
 book_tfidf %>%
@@ -589,45 +568,15 @@ book_tfidf %>%
 
 ---
 
-## **Calculating tf-idf**
+## Pop Quiz `r emo::ji("thinking")`]
 
-.large[What do you predict will happen if we run the following code? `r emo::ji("thinking")`]
+.large[What do you predict will happen if we run the following code? 
 
 ```{r}
 book_tfidf %>%
   arrange(-tf_idf)
 ```
 
----
-
-## **Calculating tf-idf**
-
-.unscramble[U N S C R A M B L E]
-
-```
-group_by(title) %>%
-```
-```
-book_tfidf %>%
-```
-```
-top_n(10) %>%
-```
-```
-ggplot(aes(fct_reorder(word, tf_idf), tf_idf, fill = title)) +
-```
-```
-facet_wrap(~title, scales = "free")
-```
-```
-ungroup %>%
-```
-```
-geom_col(show.legend = FALSE) +
-```
-```
-coord_flip() +
-```
 ---
 
 ## **Calculating tf-idf**
@@ -662,10 +611,6 @@ book_tfidf %>%
   labs(x = NULL, y = "tf-idf")
 ```
 
----
-
-background-image: url(figs/plot_tf_idf-1.png)
-background-size: 800px
 
 ---
 
@@ -689,11 +634,9 @@ tidy_ngram %>%
 
 ---
 
-<img src="figs/blue_jane.png" width="150px"/>
+## Pop Quiz `r emo::ji("thinking")`]
 
-## Jane wants to know...
-
-.large[Can we use an `anti_join()` right away to remove stop words?]
+.large[How can we remove stop words?]
 
 - .large[Yes! `r emo::ji("check")`]
 - .large[No `r emo::ji("sad")`]
@@ -759,103 +702,10 @@ background-position: center
 
 ---
 
-## **Let's install some packages**
-
-```{r, eval=FALSE}
-install.packages(c("widyr", 
-                   "igraph", 
-                   "ggraph"))
-```
-
-```{r}
-library(widyr)
-library(igraph)
-library(ggraph)
-```
-
-
----
-
-## **Network analysis**
-
-```{r}
-bigram_graph <- bigram_counts %>%
-  filter(n > 5) %>%
-  graph_from_data_frame()                  #<<
-
-bigram_graph
-```
-
----
-
-<img src="figs/blue_jane.png" width="150px"/>
-
-## Jane wants to know...
-
-.large[Is `bigram_graph` a tidy dataset?]
-
-- .large[Yes `r emo::ji("check")`]
-- .large[No `r emo::ji("no_entry_sign")`]
-
----
-
-## **Network analysis**
-
-```{r eval = FALSE}
-bigram_graph %>%
-  ggraph(layout = "nicely") +
-  geom_edge_link(aes(edge_alpha = n)) +              #<<
-  geom_node_text(aes(label = name)) +                #<<
-  theme_graph() 
-```
-
----
-
-## **Network analysis**
-
-```{r eval = FALSE}
-bigram_graph %>%
-  ggraph(layout = "nicely") +
-  geom_edge_link(aes(edge_alpha = n),             #<<
-                 show.legend = FALSE, 
-                 arrow = arrow(length = unit(1.5, 'mm')), 
-                 start_cap = circle(3, 'mm'),
-                 end_cap = circle(3, 'mm')) +
-  geom_node_text(aes(label = name)) +             #<<
-  theme_graph()
-```
-
----
-
-
-```{r echo = FALSE, fig.height=3.9}
-bigram_graph %>%
-  ggraph(layout = "nicely") +
-  geom_edge_link(aes(edge_alpha = n), 
-                 show.legend = FALSE, 
-                 arrow = arrow(length = unit(1.5, 'mm')), 
-                 start_cap = circle(3.4, 'mm'),
-                 end_cap = circle(3.3, 'mm')) +
-  geom_node_text(aes(label = name),
-                 size = 3,
-                 family = "RobotoCondensed-Regular") +
-  theme_graph()
-```
-
-
-
----
 
 class: left, middle
 
-<img src="figs/blue_jane.png" width="150px"/>
-
 # Thanks!
 
-<a href="http://twitter.com/juliasilge"><i class="fa fa-twitter fa-fw"></i>&nbsp; @juliasilge</a><br>
-<a href="http://github.com/juliasilge"><i class="fa fa-github fa-fw"></i>&nbsp; @juliasilge</a><br>
-<a href="https://juliasilge.com"><i class="fa fa-link fa-fw"></i>&nbsp; juliasilge.com</a><br>
-<a href="https://tidytextmining.com"><i class="fa fa-book fa-fw"></i>&nbsp; tidytextmining.com</a><br>
-<a href="mailto:julia.silge@gmail.com"><i class="fa fa-paper-plane fa-fw"></i>&nbsp; julia.silge@gmail.com</a>
 
 Slides created with [**remark.js**](http://remarkjs.com/) and the R package [**xaringan**](https://github.com/yihui/xaringan)
