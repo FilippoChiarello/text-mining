@@ -31,6 +31,7 @@ options(htmltools.dir.version = FALSE,
 library(knitr)
 knitr::opts_chunk$set(cache = TRUE, warning = FALSE, message = FALSE, dpi = 300)
 library(tidyverse)
+library(tidytext)
 library(silgelib)
 theme_set(theme_roboto())
 ```
@@ -185,7 +186,7 @@ class: middle, center
 
 # Go here and log in (free):
 
-.large[[bit.ly/rstudio-text-course](http://bit.ly/rstudio-text-course)]
+.large[[bit.ly/rstudio-text-course](https://rstudio.cloud/spaces/95227/join?access_code=e%2FcgTuSzM5egcw0WiSP3ThXTXjIHYqMaSA6rJb3q)]
 
 ---
 
@@ -195,13 +196,9 @@ class: middle, center
 install.packages(c("tidyverse", 
                    "tidytext", 
                    "gutenbergr"))
-
-library(tidytext)
 ```
 
 ---
-
-<img src="figs/purple_emily.png" style="position:absolute;top:20px;right:20px;" width="100px"/>
 
 ## **What do we mean by tidy text?**
 
@@ -221,8 +218,6 @@ text
 
 ---
 
-<img src="figs/purple_emily.png" style="position:absolute;top:20px;right:20px;" width="100px"/>
-
 ## **What do we mean by tidy text?**
 
 ```{r}
@@ -235,7 +230,7 @@ text_df
 
 ---
 
-<img src="figs/purple_emily.png" style="position:absolute;top:20px;right:20px;" width="100px"/>
+
 
 ## **What do we mean by tidy text?**
 
@@ -248,9 +243,7 @@ text_df %>%
 
 ---
 
-<img src="figs/blue_jane.png" width="150px"/>
-
-## Jane wants to know...
+## Pop Quiz `r emo::ji("thinking")`
 
 .large[A tidy text dataset typically has]
 
@@ -269,10 +262,11 @@ text_df %>%
 ```{r}
 library(gutenbergr)
 
-full_text <- gutenberg_download(1342)
+full_text <- gutenberg_download(6522)
+
 ```
 
-.large[What book do *you* want to analyze today? `r emo::ji_glue(":book: :partying: :book:")`]
+<img src="figs/military.jpg" width="250px"/> 
 
 ---
 
@@ -281,16 +275,18 @@ full_text <- gutenberg_download(1342)
 ```{r}
 tidy_book <- full_text %>%
   mutate(line = row_number()) %>%
-  unnest_tokens(word, text)                #<<
+  unnest_tokens(word, text)
 
-glimpse(tidy_book)
+tidy_book %>% 
+  sample_n(10) %>% 
+  glimpse()
 ```
 
 ---
 
-## **What are the most common words?**
+## ## Pop Quiz `r emo::ji("thinking")`
 
-.large[What do you predict will happen if we run the following code? `r emo::ji("thinking")`]
+.large[What do you predict will happen if we run the following code?]
 
 ```{r, eval=FALSE}
 tidy_book %>%
@@ -299,7 +295,7 @@ tidy_book %>%
 
 ---
 
-## **What are the most common words?**
+## Pop Quiz `r emo::ji("thinking")`
 
 .large[What do you predict will happen if we run the following code? `r emo::ji("thinking")`]
 
@@ -308,13 +304,6 @@ tidy_book %>%
   count(word, sort = TRUE)
 ```
 
----
-
-background-image: url(figs/stop.gif)
-background-size: 500px
-background-position: 50% 50%
-
-## **Stop words**
 
 ---
 
@@ -346,34 +335,6 @@ get_stopwords(language = "pt")
 
 ```{r}
 get_stopwords(source = "smart")
-```
-
----
-
-## **What are the most common words?**
-
-.unscramble[U N S C R A M B L E]
-
-```
-anti_join(get_stopwords(source = "smart")) %>%
-```
-```
-tidy_book %>%
-```
-```
-count(word, sort = TRUE) %>%
-```
-```
-coord_flip()
-```
-```
-geom_col() +
-```
-```
-top_n(20) %>%
-```
-```
-ggplot(aes(fct_reorder(word, n), n)) +  
 ```
 
 ---

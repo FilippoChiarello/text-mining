@@ -136,31 +136,27 @@ class: middle, center
 
 # &lt;i class="fa fa-github"&gt;&lt;/i&gt;
 
-# GitHub repo for workshop:
+# GitHub repo for Text Mining Lessons:
 
-.large[[rstd.io/conf20-tidytext](https://rstd.io/conf20-tidytext)]
+.large[[github.com/FilippoChiarello/text-mining](https://github.com/FilippoChiarello/text-mining)]
 
 ---
 
 class: inverse
 
-## Plan for this workshop
+## Plan for introductory lessons
 
 --
 
-- .large[EDA for text *today*]
+- .large[*Part I*: EDA for text]
 
 --
 
-- .large[Modeling for text *tomorrow*]
+- .large[*Part II*: Modeling for text]
 
 --
 
 - .large[Log in to RStudio Cloud 💻]
-
---
-
-- .large[Introduce yourself to your neighbors 👋]
 
 ---
 class: middle, center
@@ -169,7 +165,7 @@ class: middle, center
 
 # Go here and log in (free):
 
-.large[[bit.ly/rstudio-text-course](http://bit.ly/rstudio-text-course)]
+.large[[bit.ly/rstudio-text-course](https://rstudio.cloud/spaces/95227/join?access_code=e%2FcgTuSzM5egcw0WiSP3ThXTXjIHYqMaSA6rJb3q)]
 
 ---
 
@@ -180,13 +176,9 @@ class: middle, center
 install.packages(c("tidyverse", 
                    "tidytext", 
                    "gutenbergr"))
-
-library(tidytext)
 ```
 
 ---
-
-&lt;img src="figs/purple_emily.png" style="position:absolute;top:20px;right:20px;" width="100px"/&gt;
 
 ## **What do we mean by tidy text?**
 
@@ -218,8 +210,6 @@ text
 
 ---
 
-&lt;img src="figs/purple_emily.png" style="position:absolute;top:20px;right:20px;" width="100px"/&gt;
-
 ## **What do we mean by tidy text?**
 
 
@@ -247,7 +237,7 @@ text_df
 
 ---
 
-&lt;img src="figs/purple_emily.png" style="position:absolute;top:20px;right:20px;" width="100px"/&gt;
+
 
 ## **What do we mean by tidy text?**
 
@@ -278,9 +268,7 @@ text_df %&gt;%
 
 ---
 
-&lt;img src="figs/blue_jane.png" width="150px"/&gt;
-
-## Jane wants to know...
+## Pop Quiz 🤔
 
 .large[A tidy text dataset typically has]
 
@@ -300,10 +288,10 @@ text_df %&gt;%
 ```r
 library(gutenbergr)
 
-full_text &lt;- gutenberg_download(1342)
+full_text &lt;- gutenberg_download(6522)
 ```
 
-.large[What book do *you* want to analyze today? 📖 👯‍♀️ 📖]
+&lt;img src="figs/military.jpg" width="250px"/&gt; 
 
 ---
 
@@ -313,24 +301,26 @@ full_text &lt;- gutenberg_download(1342)
 ```r
 tidy_book &lt;- full_text %&gt;%
   mutate(line = row_number()) %&gt;%
-* unnest_tokens(word, text)
+  unnest_tokens(word, text)
 
-glimpse(tidy_book)
+tidy_book %&gt;% 
+  sample_n(10) %&gt;% 
+  glimpse()
 ```
 
 ```
-## Rows: 122,204
+## Rows: 10
 ## Columns: 3
-## $ gutenberg_id &lt;int&gt; 1342, 1342, 1342, 1342, 1342, 1342, 1342, 1342, 1342, 13…
-## $ line         &lt;int&gt; 1, 1, 1, 3, 3, 3, 7, 7, 10, 10, 10, 10, 10, 10, 10, 10, …
-## $ word         &lt;chr&gt; "pride", "and", "prejudice", "by", "jane", "austen", "ch…
+## $ gutenberg_id &lt;int&gt; 5614, 5614, 5614, 5614, 5614, 5614, 5614, 5614, 5614, 56…
+## $ line         &lt;int&gt; 6566, 12297, 2220, 9125, 4068, 1701, 10955, 1467, 12916,…
+## $ word         &lt;chr&gt; "8", "the", "the", "19", "in", "correct", "k2", "8", "23…
 ```
 
 ---
 
-## **What are the most common words?**
+## ## Pop Quiz 🤔
 
-.large[What do you predict will happen if we run the following code? 🤔]
+.large[What do you predict will happen if we run the following code?]
 
 
 ```r
@@ -340,7 +330,7 @@ tidy_book %&gt;%
 
 ---
 
-## **What are the most common words?**
+## Pop Quiz 🤔
 
 .large[What do you predict will happen if we run the following code? 🤔]
 
@@ -367,13 +357,6 @@ tidy_book %&gt;%
 ## # … with 6,528 more rows
 ```
 
----
-
-background-image: url(figs/stop.gif)
-background-size: 500px
-background-position: 50% 50%
-
-## **Stop words**
 
 ---
 
@@ -477,34 +460,6 @@ get_stopwords(source = "smart")
 ##  9 actually    smart  
 ## 10 after       smart  
 ## # … with 561 more rows
-```
-
----
-
-## **What are the most common words?**
-
-.unscramble[U N S C R A M B L E]
-
-```
-anti_join(get_stopwords(source = "smart")) %&gt;%
-```
-```
-tidy_book %&gt;%
-```
-```
-count(word, sort = TRUE) %&gt;%
-```
-```
-coord_flip()
-```
-```
-geom_col() +
-```
-```
-top_n(20) %&gt;%
-```
-```
-ggplot(aes(fct_reorder(word, n), n)) +  
 ```
 
 ---
