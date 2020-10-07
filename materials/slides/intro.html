@@ -245,6 +245,8 @@ class: middle, center
 install.packages(c("tidyverse", 
                    "tidytext", 
                    "gutenbergr"))
+
+library(tidytext)
 ```
 
 ---
@@ -366,7 +368,7 @@ library(gutenbergr)
 full_text &lt;- gutenberg_download(1342)
 ```
 
-.large[What book do *you* want to analyze today? 📖 👯‍♂️ 📖]
+.large[What book do *you* want to analyze today? 📖 👯‍♀️ 📖]
 
 ---
 
@@ -382,8 +384,8 @@ glimpse(tidy_book)
 ```
 
 ```
-## Observations: 122,204
-## Variables: 3
+## Rows: 122,204
+## Columns: 3
 ## $ gutenberg_id &lt;int&gt; 1342, 1342, 1342, 1342, 1342, 1342, 1342, 1342, 1342, 13…
 ## $ line         &lt;int&gt; 1, 1, 1, 3, 3, 3, 7, 7, 10, 10, 10, 10, 10, 10, 10, 10, …
 ## $ word         &lt;chr&gt; "pride", "and", "prejudice", "by", "jane", "austen", "ch…
@@ -1089,7 +1091,7 @@ tidy_ngram %&gt;%
 .large[Can we use an `anti_join()` right away to remove stop words?]
 
 - .large[Yes! ✅]
-- .large[No 🙍]
+- .large[No 😢]
 
 ---
 
@@ -1202,9 +1204,9 @@ bigram_graph
 ```
 
 ```
-## IGRAPH 100904d DN-- 48 45 -- 
+## IGRAPH 74803ef DN-- 48 45 -- 
 ## + attr: name (v/c), n (e/n)
-## + edges from 100904d (vertex names):
+## + edges from 74803ef (vertex names):
 ##  [1] lady       -&gt;catherine   miss       -&gt;bingley     miss       -&gt;bennet     
 ##  [4] sir        -&gt;william     de         -&gt;bourgh      miss       -&gt;darcy      
 ##  [7] colonel    -&gt;forster     colonel    -&gt;fitzwilliam cried      -&gt;elizabeth  
@@ -1327,6 +1329,32 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
 // adds .remark-code-has-line-highlighted class to <pre> parent elements
 // of code chunks containing highlighted lines with class .remark-code-line-highlighted
 (function(d) {
@@ -1344,17 +1372,6 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   }
   preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
 })(document);</script>
-
-<script>
-(function() {
-  var links = document.getElementsByTagName('a');
-  for (var i = 0; i < links.length; i++) {
-    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
-      links[i].target = '_blank';
-    }
-  }
-})();
-</script>
 
 <script>
 slideshow._releaseMath = function(el) {

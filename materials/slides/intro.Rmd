@@ -19,6 +19,15 @@ output:
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE,
         width = 80)
+
+# install.packages("xaringan")
+# install.packages("devtools")
+# install.packages("stopwords")
+# install.packages("textdata")
+# install.packages(c("tidyverse", "tidytext", "gutenbergr"))
+# devtools::install_github("https://github.com/juliasilge/silgelib")
+# devtools::install_github("hadley/emo")
+
 library(knitr)
 knitr::opts_chunk$set(cache = TRUE, warning = FALSE, message = FALSE, dpi = 300)
 library(tidyverse)
@@ -255,6 +264,8 @@ class: middle, center
 install.packages(c("tidyverse", 
                    "tidytext", 
                    "gutenbergr"))
+
+library(tidytext)
 ```
 
 ---
