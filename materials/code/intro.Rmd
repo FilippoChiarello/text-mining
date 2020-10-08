@@ -25,6 +25,8 @@ full_text <- gutenberg_download(6522)
 
 Now it's time to tokenize and tidy this text data.
 
+## Your turn 1
+
 ```{r}
 tidy_book <- full_text %>%
   mutate(line = row_number()) %>%
@@ -35,7 +37,7 @@ tidy_book
 
 What do you predict will happen if we run the following code?
 
-**PREDICT WITH YOUR NEIGHBOR BEFORE YOU RUN**
+## Your turn 2
 
 ```{r}
 tidy_book %>%
@@ -54,7 +56,7 @@ Try out some
 - different languages (`language`)
 - different sources (`source`)
 
-## What are the most common words?
+## Your turn 3
 
 **U N S C R A M B L E**
 
@@ -83,6 +85,9 @@ Explore some sentiment lexicons.
 get_sentiments("bing")
 ```
 
+
+## Your turn 4
+
 Implement sentiment analysis with an `inner_join()`
 
 ```{r}
@@ -91,16 +96,20 @@ tidy_book %>%
   count(sentiment, sort = TRUE)
 ```
 
+## Your turn 5
 
 What do you predict will happen if we run the following code?
 
-**PREDICT WITH YOUR NEIGHBOR BEFORE YOU RUN**
+**PREDICT THE RESULT BEFORE YOU RUN**
 
 ```{r}
 tidy_book %>%
   inner_join(get_sentiments("bing")) %>%            
   ___
 ```
+
+
+## Your turn 6
 
 What words contribute the most to sentiment scores for **your** book?
 
@@ -131,6 +140,9 @@ full_collection <- gutenberg_download(c(1272, 5614, 15076, 29185, 29186),
 full_collection
 ```
 
+
+## Your turn 7
+
 Count word frequencies in your collection.
 
 ```{r}
@@ -149,6 +161,8 @@ book_tfidf <- book_words %>%
 
 book_tfidf
 ```
+
+## Your turn 8
 
 What do you predict will happen if we run the following code?
 
@@ -208,44 +222,4 @@ bigram_counts <- tidy_ngram %>%
 bigram_counts
 ```
 
-## Network analysis
-
-Create a word network from bigrams!
-
-```{r}
-library(widyr)
-library(igraph)
-library(ggraph)
-
-bigram_graph <- bigram_counts %>%
-  filter(n > 5) %>%
-  ___
-
-bigram_graph
-```
-
-Visualize the network.
-
-```{r}
-bigram_graph %>%
-  ggraph(layout = "nicely") +
-  geom_edge_link(___) + 
-  geom_node_text(___) +    
-  theme_graph() 
-```
-
-
-Lots of ways to make the graph nicer!
-
-```{r}
-bigram_graph %>%
-  ggraph(layout = "nicely") +
-  geom_edge_link(___,
-                 show.legend = FALSE, 
-                 arrow = arrow(length = unit(1.5, 'mm')), 
-                 start_cap = circle(3, 'mm'),
-                 end_cap = circle(3, 'mm')) + 
-  geom_node_text(___) +    
-  theme_graph() 
-```
 

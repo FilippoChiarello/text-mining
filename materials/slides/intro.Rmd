@@ -286,7 +286,21 @@ tidy_book %>%
 
 ---
 
-## Pop Quiz 
+## Your turn 1
+
+
+```{r}
+
+# tidy_book <- full_text %>%
+#   mutate(line = row_number()) %>%
+#  _____
+
+```
+
+
+---
+
+## Your turn 2
 
 .large[What do you predict will happen if we run the following code?]
 
@@ -297,7 +311,7 @@ tidy_book %>%
 
 ---
 
-## Pop Quiz 
+## Your turn 2
 
 .large[What do you predict will happen if we run the following code?
 
@@ -353,6 +367,14 @@ tidy_book %>%
   coord_flip()
 ```
 
+---
+
+
+## Your turn 3
+
+
+
+**U N S C R A M B L E**
 
 ---
 
@@ -399,7 +421,19 @@ tidy_book %>%
 
 ---
 
-## Pop Quiz
+## Your turn 4
+
+Implement sentiment analysis with an `inner_join()`
+
+```{r}
+# tidy_book %>%
+#   #___(get_sentiments("bing")) %>%
+#   count(sentiment, sort = TRUE)
+```
+
+---
+
+## Your turn 5
 
 .large[What do you predict will happen if we run the following code?]
 
@@ -423,7 +457,7 @@ tidy_book %>%
 
 ---
 
-## **Implementing sentiment analysis**
+## Lets Visuialize
 
 ```{r, eval = FALSE}
 tidy_book %>%
@@ -504,7 +538,7 @@ full_collection %>%
 
 ---
 
-## **Counting word frequencies in your collection**
+## Your turn 7
 
 ```{r}
 book_words <- full_collection %>%
@@ -534,7 +568,7 @@ book_tfidf
 
 ---
 
-## Pop Quiz
+## Your turn 8
 
 .large[What do you predict will happen if we run the following code? 
 
@@ -545,7 +579,7 @@ book_tfidf %>%
 
 ---
 
-## Pop Quiz
+## Your turn 8
 
 .large[What do you predict will happen if we run the following code? 
 
@@ -595,7 +629,7 @@ book_tfidf %>%
 
 ```{r}
 tidy_ngram <- full_text %>%
-  unnest_tokens(bigram, text, token = "ngrams", n = 2)        #<<
+  unnest_tokens(bigram, text, token = "ngrams", n = 2)   
 
 tidy_ngram
 ```
@@ -611,9 +645,9 @@ tidy_ngram %>%
 
 ---
 
-## Pop Quiz 
+## Your Turn 10 
 
-.large[How can we remove stop words?]
+.large[Can we remove stop words?]
 
 - .large[Yes!]
 - .large[No]

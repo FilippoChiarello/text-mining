@@ -318,7 +318,20 @@ tidy_book %&gt;%
 
 ---
 
-## Pop Quiz 
+## Your turn 1
+
+
+
+```r
+# tidy_book &lt;- full_text %&gt;%
+#   mutate(line = row_number()) %&gt;%
+#  _____
+```
+
+
+---
+
+## Your turn 2
 
 .large[What do you predict will happen if we run the following code?]
 
@@ -330,7 +343,7 @@ tidy_book %&gt;%
 
 ---
 
-## Pop Quiz 
+## Your turn 2
 
 .large[What do you predict will happen if we run the following code?
 
@@ -477,10 +490,18 @@ tidy_book %&gt;%
   coord_flip()
 ```
 
+---
+
+
+## Your turn 3
+
+
+
+**U N S C R A M B L E**
 
 ---
 
-![](intro_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
+![](intro_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -540,7 +561,20 @@ tidy_book %&gt;%
 
 ---
 
-## Pop Quiz
+## Your turn 4
+
+Implement sentiment analysis with an `inner_join()`
+
+
+```r
+# tidy_book %&gt;%
+#   #___(get_sentiments("bing")) %&gt;%
+#   count(sentiment, sort = TRUE)
+```
+
+---
+
+## Your turn 5
 
 .large[What do you predict will happen if we run the following code?]
 
@@ -583,7 +617,7 @@ tidy_book %&gt;%
 
 ---
 
-## **Implementing sentiment analysis**
+## Lets Visuialize
 
 
 ```r
@@ -605,7 +639,7 @@ tidy_book %&gt;%
 
 class: middle
 
-![](intro_files/figure-html/unnamed-chunk-20-1.png)&lt;!-- --&gt;
+![](intro_files/figure-html/unnamed-chunk-22-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -664,7 +698,7 @@ full_collection %&gt;%
 
 ---
 
-## **Counting word frequencies in your collection**
+## Your turn 7
 
 
 ```r
@@ -714,7 +748,7 @@ book_tfidf
 
 ---
 
-## Pop Quiz
+## Your turn 8
 
 .large[What do you predict will happen if we run the following code? 
 
@@ -726,7 +760,7 @@ book_tfidf %&gt;%
 
 ---
 
-## Pop Quiz
+## Your turn 8
 
 .large[What do you predict will happen if we run the following code? 
 
@@ -773,7 +807,7 @@ book_tfidf %&gt;%
 
 ---
 
-![](intro_files/figure-html/unnamed-chunk-29-1.png)&lt;!-- --&gt;
+![](intro_files/figure-html/unnamed-chunk-31-1.png)&lt;!-- --&gt;
 
 
 ---
@@ -783,7 +817,7 @@ book_tfidf %&gt;%
 
 ```r
 tidy_ngram &lt;- full_text %&gt;%
-* unnest_tokens(bigram, text, token = "ngrams", n = 2)
+  unnest_tokens(bigram, text, token = "ngrams", n = 2)   
 
 tidy_ngram
 ```
@@ -834,9 +868,9 @@ tidy_ngram %&gt;%
 
 ---
 
-## Pop Quiz 
+## Your Turn 10 
 
-.large[How can we remove stop words?]
+.large[Can we remove stop words?]
 
 - .large[Yes!]
 - .large[No]
