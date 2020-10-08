@@ -22,16 +22,18 @@ options(htmltools.dir.version = FALSE,
 
 # install.packages("xaringan")
 # install.packages("devtools")
-# install.packages("stopwords")
+install.packages("stopwords")
 # install.packages("textdata")
 # install.packages(c("tidyverse", "tidytext", "gutenbergr"))
-# devtools::install_github("https://github.com/juliasilge/silgelib")
-# devtools::install_github("hadley/emo")
+devtools::install_github("https://github.com/juliasilge/silgelib")
+
 
 library(knitr)
 knitr::opts_chunk$set(cache = TRUE, warning = FALSE, message = FALSE, dpi = 300)
 library(tidyverse)
 library(tidytext)
+library(stopwords)
+library(textdata)
 library(silgelib)
 theme_set(theme_roboto())
 ```
@@ -177,7 +179,7 @@ class: inverse
 
 --
 
-- .large[Log in to RStudio Cloud `r emo::ji("computer")`]
+- .large[Log in to RStudio Cloud 
 
 ---
 class: middle, center
@@ -243,7 +245,7 @@ text_df %>%
 
 ---
 
-## Pop Quiz `r emo::ji("thinking")`
+## Pop Quiz 
 
 .large[A tidy text dataset typically has]
 
@@ -284,7 +286,7 @@ tidy_book %>%
 
 ---
 
-## Pop Quiz `r emo::ji("thinking")`
+## Pop Quiz 
 
 .large[What do you predict will happen if we run the following code?]
 
@@ -295,9 +297,9 @@ tidy_book %>%
 
 ---
 
-## Pop Quiz `r emo::ji("thinking")`
+## Pop Quiz 
 
-.large[What do you predict will happen if we run the following code? `r emo::ji("thinking")`]
+.large[What do you predict will happen if we run the following code?
 
 ```{r}
 tidy_book %>%
@@ -381,32 +383,7 @@ class: inverse, center, middle
 ## **Sentiment lexicons**
 
 ```{r}
-get_sentiments("afinn")
-```
-
----
-
-## **Sentiment lexicons**
-
-```{r}
 get_sentiments("bing")
-```
-
----
-
-## **Sentiment lexicons**
-
-
-```{r}
-get_sentiments("nrc")
-```
-
----
-
-## **Sentiment lexicons**
-
-```{r}
-get_sentiments("loughran")
 ```
 
 ---
@@ -422,7 +399,7 @@ tidy_book %>%
 
 ---
 
-## Pop Quiz `r emo::ji("thinking")`
+## Pop Quiz
 
 .large[What do you predict will happen if we run the following code?]
 
@@ -507,7 +484,7 @@ $$idf(\text{term}) = \ln{\left(\frac{n_{\text{documents}}}{n_{\text{documents co
 
 ## **Understanding tf-idf**
 
-.large[Make a collection (*corpus*) for yourself! `r emo::ji("nail")`]
+.large[Make a collection (*corpus*) for yourself
 
 ```{r}
 
@@ -557,7 +534,7 @@ book_tfidf
 
 ---
 
-## Pop Quiz `r emo::ji("thinking")`]
+## Pop Quiz
 
 .large[What do you predict will happen if we run the following code? 
 
@@ -568,7 +545,7 @@ book_tfidf %>%
 
 ---
 
-## Pop Quiz `r emo::ji("thinking")`]
+## Pop Quiz
 
 .large[What do you predict will happen if we run the following code? 
 
@@ -614,7 +591,7 @@ book_tfidf %>%
 
 ---
 
-## **N-grams... and beyond!** `r emo::ji("rocket")`
+## **N-grams... and beyond!**
 
 ```{r}
 tidy_ngram <- full_text %>%
@@ -625,7 +602,7 @@ tidy_ngram
 
 ---
 
-## **N-grams... and beyond!** `r emo::ji("rocket")`
+## **N-grams... and beyond!**
 
 ```{r}
 tidy_ngram %>%
@@ -634,16 +611,16 @@ tidy_ngram %>%
 
 ---
 
-## Pop Quiz `r emo::ji("thinking")`]
+## Pop Quiz 
 
 .large[How can we remove stop words?]
 
-- .large[Yes! `r emo::ji("check")`]
-- .large[No `r emo::ji("sad")`]
+- .large[Yes!]
+- .large[No]
 
 ---
 
-## **N-grams... and beyond!** `r emo::ji("rocket")`
+## **N-grams... and beyond!**
 
 ```{r}
 bigram_counts <- tidy_ngram %>%
@@ -655,7 +632,7 @@ bigram_counts <- tidy_ngram %>%
 
 ---
 
-## **N-grams... and beyond!** `r emo::ji("rocket")`
+## **N-grams... and beyond!**
 
 ```{r}
 bigram_counts

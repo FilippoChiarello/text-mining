@@ -156,7 +156,7 @@ class: inverse
 
 --
 
-- .large[Log in to RStudio Cloud 💻]
+- .large[Log in to RStudio Cloud 
 
 ---
 class: middle, center
@@ -268,7 +268,7 @@ text_df %&gt;%
 
 ---
 
-## Pop Quiz 🤔
+## Pop Quiz 
 
 .large[A tidy text dataset typically has]
 
@@ -312,13 +312,13 @@ tidy_book %&gt;%
 ## Rows: 10
 ## Columns: 3
 ## $ gutenberg_id &lt;int&gt; 6522, 6522, 6522, 6522, 6522, 6522, 6522, 6522, 6522, 65…
-## $ line         &lt;int&gt; 1670, 1262, 1654, 668, 1300, 1390, 1759, 1251, 261, 505
-## $ word         &lt;chr&gt; "washed", "cloud", "things", "and", "the", "along", "gai…
+## $ line         &lt;int&gt; 831, 97, 1613, 876, 333, 47, 605, 953, 1204, 1882
+## $ word         &lt;chr&gt; "were", "it", "was", "wall", "leaving", "sweetness", "my…
 ```
 
 ---
 
-## Pop Quiz 🤔
+## Pop Quiz 
 
 .large[What do you predict will happen if we run the following code?]
 
@@ -330,9 +330,9 @@ tidy_book %&gt;%
 
 ---
 
-## Pop Quiz 🤔
+## Pop Quiz 
 
-.large[What do you predict will happen if we run the following code? 🤔]
+.large[What do you predict will happen if we run the following code?
 
 
 ```r
@@ -498,32 +498,6 @@ class: inverse, center, middle
 
 
 ```r
-get_sentiments("afinn")
-```
-
-```
-## # A tibble: 2,477 x 2
-##    word       value
-##    &lt;chr&gt;      &lt;dbl&gt;
-##  1 abandon       -2
-##  2 abandoned     -2
-##  3 abandons      -2
-##  4 abducted      -2
-##  5 abduction     -2
-##  6 abductions    -2
-##  7 abhor         -3
-##  8 abhorred      -3
-##  9 abhorrent     -3
-## 10 abhors        -3
-## # … with 2,467 more rows
-```
-
----
-
-## **Sentiment lexicons**
-
-
-```r
 get_sentiments("bing")
 ```
 
@@ -542,59 +516,6 @@ get_sentiments("bing")
 ##  9 aborted     negative 
 ## 10 aborts      negative 
 ## # … with 6,776 more rows
-```
-
----
-
-## **Sentiment lexicons**
-
-
-
-```r
-get_sentiments("nrc")
-```
-
-```
-## # A tibble: 13,901 x 2
-##    word        sentiment
-##    &lt;chr&gt;       &lt;chr&gt;    
-##  1 abacus      trust    
-##  2 abandon     fear     
-##  3 abandon     negative 
-##  4 abandon     sadness  
-##  5 abandoned   anger    
-##  6 abandoned   fear     
-##  7 abandoned   negative 
-##  8 abandoned   sadness  
-##  9 abandonment anger    
-## 10 abandonment fear     
-## # … with 13,891 more rows
-```
-
----
-
-## **Sentiment lexicons**
-
-
-```r
-get_sentiments("loughran")
-```
-
-```
-## # A tibble: 4,150 x 2
-##    word         sentiment
-##    &lt;chr&gt;        &lt;chr&gt;    
-##  1 abandon      negative 
-##  2 abandoned    negative 
-##  3 abandoning   negative 
-##  4 abandonment  negative 
-##  5 abandonments negative 
-##  6 abandons     negative 
-##  7 abdicated    negative 
-##  8 abdicates    negative 
-##  9 abdicating   negative 
-## 10 abdication   negative 
-## # … with 4,140 more rows
 ```
 
 ---
@@ -619,7 +540,7 @@ tidy_book %&gt;%
 
 ---
 
-## Pop Quiz 🤔
+## Pop Quiz
 
 .large[What do you predict will happen if we run the following code?]
 
@@ -684,7 +605,7 @@ tidy_book %&gt;%
 
 class: middle
 
-![](intro_files/figure-html/unnamed-chunk-23-1.png)&lt;!-- --&gt;
+![](intro_files/figure-html/unnamed-chunk-20-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -711,7 +632,7 @@ class: inverse, center, middle
 
 ## **Understanding tf-idf**
 
-.large[Make a collection (*corpus*) for yourself! 💅]
+.large[Make a collection (*corpus*) for yourself
 
 
 ```r
@@ -793,7 +714,7 @@ book_tfidf
 
 ---
 
-## Pop Quiz 🤔]
+## Pop Quiz
 
 .large[What do you predict will happen if we run the following code? 
 
@@ -805,7 +726,7 @@ book_tfidf %&gt;%
 
 ---
 
-## Pop Quiz 🤔]
+## Pop Quiz
 
 .large[What do you predict will happen if we run the following code? 
 
@@ -852,12 +773,12 @@ book_tfidf %&gt;%
 
 ---
 
-![](intro_files/figure-html/unnamed-chunk-32-1.png)&lt;!-- --&gt;
+![](intro_files/figure-html/unnamed-chunk-29-1.png)&lt;!-- --&gt;
 
 
 ---
 
-## **N-grams... and beyond!** 🚀
+## **N-grams... and beyond!**
 
 
 ```r
@@ -886,7 +807,7 @@ tidy_ngram
 
 ---
 
-## **N-grams... and beyond!** 🚀
+## **N-grams... and beyond!**
 
 
 ```r
@@ -913,16 +834,16 @@ tidy_ngram %&gt;%
 
 ---
 
-## Pop Quiz 🤔]
+## Pop Quiz 
 
 .large[How can we remove stop words?]
 
-- .large[Yes! ✅]
-- .large[No 😭]
+- .large[Yes!]
+- .large[No]
 
 ---
 
-## **N-grams... and beyond!** 🚀
+## **N-grams... and beyond!**
 
 
 ```r
@@ -935,7 +856,7 @@ bigram_counts &lt;- tidy_ngram %&gt;%
 
 ---
 
-## **N-grams... and beyond!** 🚀
+## **N-grams... and beyond!**
 
 
 ```r
