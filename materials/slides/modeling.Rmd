@@ -95,12 +95,12 @@ background-size: cover
 ## Let's install some packages
 
 ```{r, eval=FALSE}
-install.packages(c("tidyverse", 
-                   "tidytext",
-                   "gutenbergr",                   
-                   "tidymodels",
-                   "stm",
-                   "glmnet"))
+# install.packages(c("tidyverse", 
+#                    "tidytext",
+#                    "gutenbergr",                   
+#                    "tidymodels",
+#                    "stm",
+#                    "glmnet"))
 ```
 
 
@@ -249,9 +249,9 @@ Use a sparse matrix or a `quanteda::dfm` object as input
 ```{r}
 library(stm)
 
-topic_model <- stm(words_sparse, K = 4, 
+topic_model <- stm(words_sparse, K = 2, 
                    verbose = FALSE, 
-                   init.type = "Spectral")
+                   init.type = "Spectral", )
 
 ```
 ---
