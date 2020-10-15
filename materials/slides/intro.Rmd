@@ -22,10 +22,10 @@ options(htmltools.dir.version = FALSE,
 
 # install.packages("xaringan")
 # install.packages("devtools")
-install.packages("stopwords")
+# install.packages("stopwords")
 # install.packages("textdata")
 # install.packages(c("tidyverse", "tidytext", "gutenbergr"))
-devtools::install_github("https://github.com/juliasilge/silgelib")
+#devtools::install_github("https://github.com/juliasilge/silgelib")
 
 
 library(knitr)
@@ -34,8 +34,8 @@ library(tidyverse)
 library(tidytext)
 library(stopwords)
 library(textdata)
-library(silgelib)
-theme_set(theme_roboto())
+#library(silgelib)
+#theme_set(theme_roboto())
 ```
 
 layout: true
