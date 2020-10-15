@@ -40,7 +40,9 @@ background-size: cover
 
 # WELCOME!
 
-### Text Mining Using Tidy Data Principles
+## Text Mining Using Tidy Data Principles
+
+### for Strategic and Competitive Intelligence
 
 ---
 
@@ -49,114 +51,11 @@ class: inverse, center, middle
 background-image: url(figs/p_and_p_cover.png)
 background-size: cover
 
-
 # Text Modeling
 
 <img src="figs/blue_jane.png" width="150px"/>
 
 ### USING TIDY PRINCIPLES
-
-.large[Julia Silge | rstudio::conf | 28 Jan 2020]
-
----
-
-class: middle, center
-
-.pull-left[
-# <i class="fa fa-wifi"></i>
-
-Wifi network name  
-
-.large[rstudio20]
-
-]
-
-.pull-left[
-# <i class="fa fa-key"></i>
-
-Wifi password
-
-.large[tidyverse20]
-
-]
-
----
-
-<img src="figs/blue_jane.png" style="position:absolute;top:30px;right:30px;" width="100px"/>
-
-## **Workshop policies**
-
---
-
-- .large[Identify the exits closest to you in case of emergency] 
-
---
-
-- .large[Please review the rstudio::conf code of conduct that applies to all workshops]
-
---
-
-- .large[CoC issues can be addressed three ways:]
-
-  - In person: contact any rstudio::conf staff member or the conference registration desk
-  - By email: send a message to `conf@rstudio.com`
-  - By phone: call 844-448-1212
-
---
-
-- .large[Please do not photograph people wearing red lanyards]
-
---
-
-- .large[A chill-out room is available for neurologically diverse attendees on the 4th floor of tower 1]
-
----
-
-class: right, middle
-
-<img src="figs/blue_jane.png" width="150px"/>
-
-# Find me at...
-
-<a href="http://twitter.com/juliasilge"><i class="fa fa-twitter fa-fw"></i>&nbsp; @juliasilge</a><br>
-<a href="http://github.com/juliasilge"><i class="fa fa-github fa-fw"></i>&nbsp; @juliasilge</a><br>
-<a href="https://juliasilge.com"><i class="fa fa-link fa-fw"></i>&nbsp; juliasilge.com</a><br>
-<a href="https://tidytextmining.com"><i class="fa fa-book fa-fw"></i>&nbsp; tidytextmining.com</a><br>
-<a href="mailto:julia.silge@gmail.com"><i class="fa fa-paper-plane fa-fw"></i>&nbsp; julia.silge@gmail.com</a>
-
----
-
-class: left, top
-
-<img src="figs/blue_jane.png" width="150px"/>
-
-# Meet your TAs
-
-## `r emo::ji("dizzy")` Emil Hvitfelt (coordinator)
-
-## `r emo::ji("boom")` Jeroen Claes
-
-## `r emo::ji("sparkles")` Kasia Kulma
-
----
-
-class: left, top
-
-<img src="figs/blue_jane.png" width="150px"/>
-
-# Asking for help
-
---
-
-## `r emo::ji("sos")`  "I'm stuck"
-
---
-
-## `r emo::ji("warning")`  "I'm not stuck, but I need help on my computer"
-
---
-
-## `r emo::ji("raising_hand_woman")`  "I need help understanding something"
 
 ---
 
@@ -185,11 +84,11 @@ background-size: cover
 
 --
 
-### `r emo::ji("bulb")` Topic modeling
+###  Topic modeling
 
 --
 
-### `r emo::ji("bulb")` Text classification
+###  Text classification
 
 ---
 
@@ -214,11 +113,11 @@ background-size: cover
 
 # Topic modeling
 
-### `r emo::ji("open_book")` Each DOCUMENT = mixture of topics
+###  Each DOCUMENT = mixture of topics
 
 --
 
-### `r emo::ji("bookmark_tabs")` Each TOPIC = mixture of tokens
+### Each TOPIC = mixture of tokens
 
 ---
 
@@ -234,7 +133,7 @@ class: center, middle, inverse
 background-image: url(figs/p_and_p_cover.png)
 background-size: cover
 
-# GREAT LIBRARY HEIST `r emo::ji("sleuth")`
+# GREAT LIBRARY HEIST
 
 ---
 
@@ -253,9 +152,9 @@ books %>%
 
 ---
 
-## **Someone has torn your books apart!** `r emo::ji("sob")`
+## **Someone has torn your books apart!** 
 
-.large[What do you predict will happen if we run the following code? `r emo::ji("thinking")`]
+.large[What do you predict will happen if we run the following code?
 
 ```{r eval = FALSE}
 by_chapter <- books %>%
@@ -272,9 +171,9 @@ glimpse(by_chapter)
 
 ---
 
-## **Someone has torn your books apart!** `r emo::ji("sob")`
+## **Someone has torn your books apart!**
 
-.large[What do you predict will happen if we run the following code? `r emo::ji("thinking")`]
+.large[What do you predict will happen if we run the following code?
 
 ```{r}
 by_chapter <- books %>%
@@ -338,8 +237,8 @@ dim(words_sparse)
 
 .large[Is `words_sparse` a tidy dataset?]
 
-- .large[Yes `r emo::ji("check")`]
-- .large[No `r emo::ji("no_entry_sign")`]
+- .large[Yes]
+- .large[No]
 
 ---
 
@@ -460,7 +359,7 @@ chapters_gamma
 
 ## **How are documents classified?**
 
-.large[What do you predict will happen if we run the following code? `r emo::ji("thinking")`]
+.large[What do you predict will happen if we run the following code?]
 
 ```{r eval=FALSE}
 chapters_parsed <- chapters_gamma %>%
@@ -474,7 +373,7 @@ chapters_parsed
 
 ## **How are documents classified?**
 
-.large[What do you predict will happen if we run the following code? `r emo::ji("thinking")`]
+.large[What do you predict will happen if we run the following code?]
 
 ```{r}
 chapters_parsed <- chapters_gamma %>%
@@ -536,7 +435,7 @@ class: center, middle, inverse
 background-image: url(figs/p_and_p_cover.png)
 background-size: cover
 
-# GOING FARTHER `r emo::ji("rocket")`
+# GOING FARTHER
 
 ---
 
@@ -680,11 +579,11 @@ k_result %>%
 
 --
 
-- .large[Correlates well with human judgment of topic quality `r emo::ji("happy")`]
+- .large[Correlates well with human judgment of topic quality
 
 --
 
-- .large[Having high semantic coherence is relatively easy, though, if you only have a few topics dominated by very common words `r emo::ji("sad")`]
+- .large[Having high semantic coherence is relatively easy, though, if you only have a few topics dominated by very common words 
 
 --
 
@@ -764,7 +663,7 @@ glimpse(books)
 
 ## **Making a tidy dataset**
 
-.large[Use this kind of data structure for EDA! `r emo::ji("nail")`]
+.large[Use this kind of data structure for EDA!]
 
 ```{r}
 library(tidytext)
@@ -782,7 +681,7 @@ glimpse(tidy_books)
 
 ## **Create training and testing sets**
 
-.large[What do you predict will happen if we run the following code? `r emo::ji("thinking")`]
+.large[What do you predict will happen if we run the following code?]
 
 ```{r}
 library(rsample)
@@ -998,7 +897,7 @@ coefs %>%
 
 ## **ROC**
 
-.large[What do you predict will happen if we run the following code? `r emo::ji("thinking")`]
+.large[What do you predict will happen if we run the following code?]
 
 ```{r eval=FALSE}
 comment_classes <- classifications %>%
@@ -1013,7 +912,7 @@ comment_classes
 
 ## **ROC**
 
-.large[What do you predict will happen if we run the following code? `r emo::ji("thinking")`]
+.large[What do you predict will happen if we run the following code?]
 
 ```{r}
 comment_classes <- classifications %>%
